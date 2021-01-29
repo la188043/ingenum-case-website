@@ -1,11 +1,17 @@
+import React, { useState } from 'react';
+
 import { Section as SectionType } from '../models/Section.model';
 import { Task } from '../models/Task.model';
+
+import Popup from '../../shared/components/Popup';
 interface Props {
   section: SectionType;
 }
 
 const Section = ({ section }: Props) => {
   const tasks: Task[] = section.tasks;
+
+  const [isPopupVisible, setPopupVisible] = useState<boolean>(false);
 
   return (
     <div className="section">
@@ -14,9 +20,12 @@ const Section = ({ section }: Props) => {
       </h2>
       <div className="tasks-container u-mt-lg">
         {tasks.map((task: Task) => (
-          <div className="task">
-            <p className="paragraph">{task.name}</p>
-          </div>
+          <>
+            {isPopupVisible && <Popup>{/* TODO Inputs */}</Popup>}
+            <div className="task">
+              <p className="paragraph">{task.name}</p>
+            </div>
+          </>
         ))}
       </div>
     </div>

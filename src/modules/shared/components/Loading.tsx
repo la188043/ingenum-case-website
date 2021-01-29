@@ -1,6 +1,5 @@
 import { PropsWithChildren } from 'react';
 import { ClipLoader } from 'react-spinners';
-import { createLogicalNot } from 'typescript';
 
 interface Props {
   loading: boolean;
