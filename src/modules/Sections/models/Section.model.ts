@@ -1,4 +1,4 @@
-import Task from './Task.model';
+import { Task } from './Task.model';
 
 export interface Section {
   id?: string;
