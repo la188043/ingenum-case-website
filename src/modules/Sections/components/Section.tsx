@@ -22,7 +22,10 @@ const Section = ({ section }: Props) => {
         {tasks.map((task: Task) => (
           <>
             {isPopupVisible && (
-              <Popup>{/* TODO Change: is being displayed due to map */}</Popup>
+              <Popup>
+                <></>
+                {/* TODO Change: is being displayed due to map */}
+              </Popup>
             )}
             <div className="task">
               <p className="paragraph">{task.name}</p>
