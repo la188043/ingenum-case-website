@@ -43,12 +43,22 @@ const Section = ({ section }: Props) => {
         {section.name}
       </h2>
       <div className="tasks-container u-mt-lg">
-        <form onSubmit={handleAddTask}>
-          <input type="text" name="name" onChange={handleChange} />
+        <form className="form" onSubmit={handleAddTask}>
+          <input
+            className="form__input"
+            type="text"
+            name="name"
+            onChange={handleChange}
+          />
 
           <input type="datetime-local" name="dueDate" onChange={handleChange} />
 
-          <input type="text" name="description" onChange={handleChange} />
+          <input
+            className="form__input"
+            type="text"
+            name="description"
+            onChange={handleChange}
+          />
 
           <Button type="submit" value="Ajouter" />
         </form>
