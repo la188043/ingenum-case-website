@@ -5,7 +5,7 @@ import sectionService from '../services/section.service';
 import { Section as SectionType } from '../models/Section.model';
 
 import Loading from '../../shared/components/Loading';
-import Section from '../components/Section';
+import Section from './Section';
 
 const ManageSections = () => {
   const [sections, setSections] = useState<SectionType[]>([]);
@@ -24,11 +24,11 @@ const ManageSections = () => {
 
   return (
     <Loading loading={loading}>
-      {sections.map((section: SectionType) => (
-        <p key={section.id} className="paragraph">
-          <Section section={section} />
-        </p>
-      ))}
+      <div className="sections-container">
+        {sections.map((section: SectionType) => (
+          <Section key={section.id} section={section} />
+        ))}
+      </div>
     </Loading>
   );
 };

@@ -6,6 +6,7 @@ const endpoint = '/tables';
 
 const getAll = (): Promise<Section[]> => httpService.get(endpoint);
 
+// eslint-disable-next-line
 export default {
   getAll,
 };

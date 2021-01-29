@@ -1,7 +1,7 @@
 import { promises } from 'fs';
 import React from 'react';
 
-import ManageSection from '../../Sections/ManageSections';
+import ManageSection from '../../Sections/components/ManageSections';
 
 const App = () => (
   <div className="container">
