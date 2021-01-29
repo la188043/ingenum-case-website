@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import sectionService from '../services/section.service';
 
-import { Section } from '../models/Section.model';
-import { Task } from '../models/Task.model';
+import { Section as SectionType } from '../models/Section.model';
 
 import Loading from '../../shared/components/Loading';
+import Section from '../components/Section';
 
 const ManageSections = () => {
-  const [sections, setSections] = useState<Section[]>([]);
+  const [sections, setSections] = useState<SectionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const loadSections = async () => {
@@ -24,9 +24,9 @@ const ManageSections = () => {
 
   return (
     <Loading loading={loading}>
-      {sections.map((section: Section) => (
+      {sections.map((section: SectionType) => (
         <p key={section.id} className="paragraph">
-          {section.name}
+          <Section section={section} />
         </p>
       ))}
     </Loading>
