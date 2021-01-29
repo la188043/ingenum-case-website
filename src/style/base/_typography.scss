@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.heading-primary {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: $color-grey-dark-3;
+}
+
+.heading-secondary {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $color-grey-dark-3;
+}
+
+.paragraph {
+  font-size: 1.4rem;
+  color: $color-grey-dark-3;
+}
+
+.error-message {
+  font-size: 1.8rem;
+  color: $color-danger;
+  font-weight: 900;
+}
