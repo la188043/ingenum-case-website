@@ -1,3 +1,9 @@
 .task {
-  // TODO
+  border: 1px solid $color-grey-light-3;
+  border-radius: 5px;
+  padding: 5px 15px;
+}
+
+.task + .task {
+  margin-top: 5px;
 }
