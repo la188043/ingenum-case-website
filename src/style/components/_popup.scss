@@ -7,8 +7,6 @@
   transform: translate(-50%, -50%);
   background-color: rgba($color-black, 0.8);
   z-index: 999;
-  opacity: 0;
-  visibility: hidden;
 
   @supports (-webkit-backdrop-filter: blur(10px)) or
     (backdrop-filter: blur(10px)) {
@@ -17,10 +15,5 @@
     backdrop-filter: blur(10px);
 
     backface-visibility: hidden;
-  }
-
-  &.visible {
-    opacity: 1;
-    visibility: visible;
   }
 }

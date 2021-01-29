@@ -11,7 +11,7 @@ interface Props {
 const Section = ({ section }: Props) => {
   const tasks: Task[] = section.tasks;
 
-  const [isPopupVisible, setPopupVisible] = useState<boolean>(false);
+  const [isPopupVisible, setPopupVisible] = useState<boolean>(true);
 
   return (
     <div className="section">
@@ -21,7 +21,9 @@ const Section = ({ section }: Props) => {
       <div className="tasks-container u-mt-lg">
         {tasks.map((task: Task) => (
           <>
-            {isPopupVisible && <Popup>{/* TODO Inputs */}</Popup>}
+            {isPopupVisible && (
+              <Popup>{/* TODO Change: is being displayed due to map */}</Popup>
+            )}
             <div className="task">
               <p className="paragraph">{task.name}</p>
             </div>
