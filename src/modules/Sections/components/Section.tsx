@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import sectionService from '../services/section.service';
 import taskService from '../services/task.service';
@@ -21,6 +21,8 @@ const Section = ({ section }: Props) => {
     tableId: section.id ? section.id : '',
   };
 
+  const formRef = useRef(null);
+
   const [tasks, setTasks] = useState<Task[]>(section.tasks);
   const [formData, setFormData] = useState<AddTask>(initialFormValues);
 
@@ -40,7 +42,11 @@ const Section = ({ section }: Props) => {
     resetForm();
   };
 
-  const resetForm = () => setFormData(initialFormValues);
+  const resetForm = () => {
+    setFormData(initialFormValues);
+    const currentForm = formRef.current;
+    currentForm.reset(); // TODO handle this
+  };
 
   return (
     <div className="section">
@@ -48,7 +54,7 @@ const Section = ({ section }: Props) => {
         {section.name}
       </h2>
       <div className="tasks-container u-mt-lg">
-        <form className="form u-mb-md" onSubmit={handleAddTask}>
+        <form className="form u-mb-md" onSubmit={handleAddTask} ref={formRef}>
           {/* TODO form security */}
           <h3 className="heading-tertiary">Ajouter une tâche</h3>
           <input
