@@ -60,7 +60,7 @@ const Section = ({ section }: Props) => {
             onChange={handleChange}
           />
 
-          <Button type="submit" value="Ajouter" />
+          <Button type="submit" className="btn--secondary" value="Ajouter" />
         </form>
         {tasks.map((task: Task) => (
           <>
