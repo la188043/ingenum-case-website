@@ -1,4 +1,10 @@
 .sections-container {
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
+  flex-wrap: wrap;
+
+  & > * {
+    flex: 0 0 calc(33.33333333% - 2rem);
+    margin: 1rem;
+  }
 }

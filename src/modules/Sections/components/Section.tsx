@@ -45,7 +45,7 @@ const Section = ({ section }: Props) => {
   const resetForm = () => {
     setFormData(initialFormValues);
     const currentForm = formRef.current;
-    currentForm.reset(); // TODO handle this
+    // currentForm.reset(); // TODO handle this
   };
 
   return (
