@@ -12,6 +12,10 @@
     &:focus {
       border-color: $color-secondary;
     }
+
+    &.invalid {
+      border-color: $color-danger;
+    }
   }
 
   .btn {

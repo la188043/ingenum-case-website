@@ -23,23 +23,43 @@
     outline: none;
   }
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   &--primary {
     background-color: $color-primary;
     color: $color-grey-light-1;
+
+    &:disabled {
+      background-color: lighten($color-primary, 10%);
+    }
   }
 
   &--secondary {
     background-color: $color-secondary;
     color: $color-grey-light-1;
+
+    &:disabled {
+      background-color: lighten($color-secondary, 10%);
+    }
   }
 
   &--danger {
     background-color: $color-danger;
     color: $color-grey-light-1;
+
+    &:disabled {
+      background-color: lighten($color-danger, 10%);
+    }
   }
 
   &--info {
     background-color: $color-info;
     color: $color-grey-light-1;
+
+    &:disabled {
+      background-color: lighten($color-info, 10%);
+    }
   }
 }
