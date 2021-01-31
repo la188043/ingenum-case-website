@@ -106,11 +106,9 @@ const Section = ({ section }: Props) => {
         </form>
 
         {tasks.map((task: Task) => (
-          <>
-            <div className="task">
-              <p className="paragraph">{task.name}</p>
-            </div>
-          </>
+          <div className="task" key={task.id}>
+            <p className="paragraph">{task.name}</p>
+          </div>
         ))}
       </div>
     </div>
