@@ -15,12 +15,12 @@ interface Props {
 const Section = ({ section }: Props) => {
   const initialFormValues: AddTask = {
     name: '',
-    dueDate: new Date(),
+    // dueDate: new Date(),
     description: '',
     tableId: section.id ? section.id : '',
   };
 
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const [tasks, setTasks] = useState<Task[]>(section.tasks);
   const [formData, setFormData] = useState<AddTask>(initialFormValues);
@@ -50,16 +50,20 @@ const Section = ({ section }: Props) => {
   const handleAddTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const newTask = await taskService.addTask(formData);
-    setTasks([...tasks, newTask]);
+    try {
+      const newTask = await taskService.addTask(formData);
+      setTasks([...tasks, newTask]);
+    } catch {
+      return;
+    }
 
     resetForm();
   };
 
   const resetForm = () => {
     setFormData(initialFormValues);
-    // const currentForm = formRef.current;
-    // currentForm.reset(); // TODO handle this
+
+    formRef.current?.reset();
   };
 
   return (

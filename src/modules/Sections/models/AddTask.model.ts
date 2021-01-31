@@ -1,6 +1,6 @@
 export interface AddTask {
   name: string;
-  dueDate: Date;
+  dueDate?: Date;
   description: string;
   tableId: string;
 }
