@@ -6,7 +6,6 @@ const exec = (endpoint: string, method: string, body?: any) =>
     body,
     headers: { 'Content-Type': 'application/json' },
   }).then(async result => {
-    console.log(result);
     const text = await result.text();
 
     if (!text) {

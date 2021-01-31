@@ -53,7 +53,7 @@ const Section = ({ section }: Props) => {
       const newTask = await taskService.addTask(formData);
       setTasks([...tasks, newTask]);
     } catch {
-      return;
+      return; // TODO Notification
     }
 
     resetForm();
@@ -66,14 +66,14 @@ const Section = ({ section }: Props) => {
   };
 
   const handleDeleteTask = async (taskIndex: number, taskId: string) => {
-    if (!taskId) return;
+    if (!taskId) return; // TODO Notification
 
     try {
       if (await taskService.deleteTask(taskId)) {
         setTasks([...tasks.filter(task => task.id !== taskId)]);
       }
     } catch (err) {
-      console.log(err);
+      return; // TODO Notification
     }
   };
 
@@ -123,7 +123,7 @@ const Section = ({ section }: Props) => {
               <Button
                 type="button"
                 iconName="fa-trash-alt"
-                className="btn--danger"
+                className="btn--danger btn--icon"
                 onClick={() => handleDeleteTask(index, task.id || '')}
               />
             </div>

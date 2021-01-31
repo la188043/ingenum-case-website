@@ -13,12 +13,6 @@
     cursor: pointer;
   }
 
-  .icon {
-    i {
-      font-size: 4rem;
-    }
-  }
-
   &:hover {
     transform: scale(1.02);
   }
@@ -31,6 +25,10 @@
 
   &:disabled {
     cursor: not-allowed;
+  }
+
+  &--icon {
+    padding: 0.8rem;
   }
 
   &--primary {
