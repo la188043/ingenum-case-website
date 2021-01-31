@@ -1,15 +1,12 @@
 import config from '../config';
 
-const exec = (
-  endpoint: string,
-  method: string,
-  body?: any
-) =>
+const exec = (endpoint: string, method: string, body?: any) =>
   fetch(`${config.apiUrl}${endpoint}`, {
     method,
     body,
     headers: { 'Content-Type': 'application/json' },
   }).then(async result => {
+    console.log(result);
     const text = await result.text();
 
     if (!text) {

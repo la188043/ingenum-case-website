@@ -15,7 +15,6 @@ interface Props {
 const Section = ({ section }: Props) => {
   const initialFormValues: AddTask = {
     name: '',
-    // dueDate: new Date(),
     description: '',
     tableId: section.id ? section.id : '',
   };
@@ -66,6 +65,18 @@ const Section = ({ section }: Props) => {
     formRef.current?.reset();
   };
 
+  const handleDeleteTask = async (taskIndex: number, taskId: string) => {
+    if (!taskId) return;
+
+    try {
+      if (await taskService.deleteTask(taskId)) {
+        setTasks([...tasks.filter(task => task.id !== taskId)]);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="section">
       <h2 className="heading-secondary u-center-text underline">
@@ -105,9 +116,17 @@ const Section = ({ section }: Props) => {
           />
         </form>
 
-        {tasks.map((task: Task) => (
+        {tasks.map((task: Task, index: number) => (
           <div className="task" key={task.id}>
             <p className="paragraph">{task.name}</p>
+            <div className="buttons">
+              <Button
+                type="button"
+                iconName="fa-trash-alt"
+                className="btn--danger"
+                onClick={() => handleDeleteTask(index, task.id || '')}
+              />
+            </div>
           </div>
         ))}
       </div>
