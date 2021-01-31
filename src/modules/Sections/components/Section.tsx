@@ -73,7 +73,6 @@ const Section = ({ section }: Props) => {
       </h2>
       <div className="tasks-container u-mt-lg">
         <form className="form u-mb-md" onSubmit={handleAddTask} ref={formRef}>
-          {/* TODO form security */}
           <h3 className="heading-tertiary">Ajouter une tâche</h3>
           <input
             className="form__input"
