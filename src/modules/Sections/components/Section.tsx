@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-import sectionService from '../services/section.service';
 import taskService from '../services/task.service';
 
 import { Section as SectionType } from '../models/Section.model';
@@ -25,6 +24,21 @@ const Section = ({ section }: Props) => {
 
   const [tasks, setTasks] = useState<Task[]>(section.tasks);
   const [formData, setFormData] = useState<AddTask>(initialFormValues);
+  const [isFormValid, setFormValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    const nameValidation: RegExp = /.{4,}/g;
+    const descriptionValidation: RegExp = /.{9,}/g;
+
+    if (
+      nameValidation.test(formData.name) &&
+      descriptionValidation.test(formData.description)
+    ) {
+      setFormValid(true);
+    } else {
+      setFormValid(false);
+    }
+  }, [formData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -44,7 +58,7 @@ const Section = ({ section }: Props) => {
 
   const resetForm = () => {
     setFormData(initialFormValues);
-    const currentForm = formRef.current;
+    // const currentForm = formRef.current;
     // currentForm.reset(); // TODO handle this
   };
 
@@ -80,8 +94,14 @@ const Section = ({ section }: Props) => {
             onChange={handleChange}
           />
 
-          <Button type="submit" className="btn--secondary" value="Ajouter" />
+          <Button
+            type="submit"
+            className="btn--secondary"
+            value="Ajouter"
+            disabled={!isFormValid}
+          />
         </form>
+
         {tasks.map((task: Task) => (
           <>
             <div className="task">
