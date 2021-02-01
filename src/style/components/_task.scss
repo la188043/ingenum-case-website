@@ -1,7 +1,21 @@
 .task {
-  border: 1px solid $color-grey-light-3;
+  border: 1.2px solid $color-grey-light-3;
   border-radius: 5px;
   padding: 5px 15px;
+  transition: all 0.3s;
+
+  .paragraph {
+    transition: all 0.3s;
+  }
+
+  &:hover {
+    background-color: $color-grey-light-1;
+    border-color: $color-secondary;
+
+    .paragraph {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .task + .task {
