@@ -118,8 +118,13 @@ const Section = ({ section }: Props) => {
 
         {tasks.map((task: Task, index: number) => (
           <div className="task" key={task.id}>
-            <p className="paragraph">{task.name}</p>
-            <div className="buttons">
+            <div className="task__details">
+              <p className="task__name paragraph">{task.name}</p>
+              <p className="task__description u-mt-sm paragraph">
+                {task.description}
+              </p>
+            </div>
+            <div className="task__buttons">
               <Button
                 type="button"
                 iconName="fa-trash-alt"
