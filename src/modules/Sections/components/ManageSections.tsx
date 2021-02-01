@@ -53,6 +53,17 @@ const ManageSections = () => {
     resetForm();
   };
 
+  const handleMoveTask = (taskId: string, currentSectionId: string) => {
+    const nextSectionIndex = sections.findIndex(
+      section => section.id === currentSectionId
+    );
+    const nextSectionId = sections[nextSectionIndex + 1]?.id;
+
+    console.log(
+      `Moving task (${taskId}) from ${currentSectionId} to ${nextSectionId}`
+    );
+  };
+
   return (
     <Loading loading={loading}>
       <form className="form u-mb-md" onSubmit={handleAddSection} ref={formRef}>
@@ -69,7 +80,11 @@ const ManageSections = () => {
       </form>
       <div className="sections-container">
         {sections.map((section: SectionType) => (
-          <Section key={section.id} section={section} />
+          <Section
+            key={section.id}
+            section={section}
+            onMoveClick={handleMoveTask}
+          />
         ))}
       </div>
     </Loading>

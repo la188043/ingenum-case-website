@@ -66,4 +66,13 @@
       background-color: lighten($color-info, 10%);
     }
   }
+
+  &--white {
+    background-color: $color-grey-light-3;
+    color: $color-grey-dark-3;
+
+    &:disabled {
+      background-color: lighten($color-grey-light-3, 10%);
+    }
+  }
 }
