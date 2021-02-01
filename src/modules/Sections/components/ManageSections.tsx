@@ -55,11 +55,11 @@ const ManageSections = () => {
   };
 
   const handleMoveTask = async (taskId: string, currentSectionId: string) => {
-    const nextSectionIndex: number =
+    const nextSectionIndex =
       sections.findIndex(section => section.id === currentSectionId) + 1;
 
     if (nextSectionIndex < sections.length) {
-      const nextSection = sections[nextSectionIndex];
+      const nextSection: SectionType = sections[nextSectionIndex];
       const nextSectionId = nextSection.id;
 
       setLoading(true);
