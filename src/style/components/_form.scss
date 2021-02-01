@@ -8,6 +8,7 @@
     border: 1px solid $color-grey-dark-1;
     border-radius: 5px;
     transition: all 0.3s;
+    font-family: inherit;
 
     &:focus {
       border-color: $color-secondary;
@@ -23,6 +24,6 @@
   }
 
   * + * {
-    margin-top: 1rem;
+    margin-top: 10px;
   }
 }
