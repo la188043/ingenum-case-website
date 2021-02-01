@@ -8,6 +8,7 @@ import Loading from '../../shared/components/Loading';
 import Section from './Section';
 import { AddSection } from '../models/AddSection.model';
 import Button from '../../shared/components/Button';
+import taskService from '../services/task.service';
 
 const ManageSections = () => {
   const [sections, setSections] = useState<SectionType[]>([]);
@@ -53,15 +54,22 @@ const ManageSections = () => {
     resetForm();
   };
 
-  const handleMoveTask = (taskId: string, currentSectionId: string) => {
-    const nextSectionIndex = sections.findIndex(
-      section => section.id === currentSectionId
-    );
-    const nextSectionId = sections[nextSectionIndex + 1]?.id;
+  const handleMoveTask = async (taskId: string, currentSectionId: string) => {
+    const nextSectionIndex: number =
+      sections.findIndex(section => section.id === currentSectionId) + 1;
 
-    console.log(
-      `Moving task (${taskId}) from ${currentSectionId} to ${nextSectionId}`
-    );
+    if (nextSectionIndex < sections.length) {
+      const nextSection = sections[nextSectionIndex];
+      const nextSectionId = nextSection.id;
+
+      setLoading(true);
+      await taskService.moveTask(taskId, { tableId: nextSectionId! });
+      setLoading(false);
+
+      loadSections();
+    } else {
+      return; // TODO Notification
+    }
   };
 
   return (

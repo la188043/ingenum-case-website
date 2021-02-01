@@ -12,7 +12,7 @@ const deleteTask = (taskId: string): Promise<boolean> =>
   httpService.remove(`${endpoint}/${taskId}`);
 
 const moveTask = (taskId: string, table: UpdateTask): Promise<boolean> =>
-  httpService.put(`${endpoint}/move/${taskId}`, table);
+  httpService.put(`${endpoint}/move/${taskId}`, JSON.stringify(table));
 
 // eslint-disable-next-line
 export default {
