@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Button from '../../shared/components/Button';
 import OverlayModal from '../../shared/components/ModalOverlay';
+import TaskForm from './TaskForm';
 
 interface Props {
   task: TaskType;
@@ -17,16 +18,23 @@ const Task = ({ task, index, onMoveClick, handleDeleteTask }: Props) => {
   const onOpenModal = () => setModalOpen(true);
   const onCloseModal = () => setModalOpen(false);
 
+  const handleUpdateTask = (
+    event: React.FormEvent<HTMLFormElement>,
+    newTask: TaskType
+  ) => {
+    event.preventDefault();
+    console.log(newTask);
+  };
+
   return (
     <>
       {isModalOpen && (
         <OverlayModal onClose={onCloseModal}>
-          <h2 className="heading-secondary u-mb-md">Modifier une tâche</h2>
-          <p className="paragraph">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-            ullam, fuga cum consectetur ea nihil perferendis quasi optio
-            pariatur quod!
-          </p>
+          <TaskForm
+            action="update"
+            task={task}
+            onSubmit={handleUpdateTask}
+          ></TaskForm>
         </OverlayModal>
       )}
       <div className="task" key={task.id}>
