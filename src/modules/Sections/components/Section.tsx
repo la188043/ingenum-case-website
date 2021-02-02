@@ -3,8 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import taskService from '../services/task.service';
 
 import { Section as SectionType } from '../models/Section.model';
-import { Task } from '../models/Task.model';
+import { Task as TaskType } from '../models/Task.model';
 import { AddTask } from '../models/AddTask.model';
+
+import Task from '../components/Task';
 
 import Button from '../../shared/components/Button';
 
@@ -22,7 +24,7 @@ const Section = ({ section, onMoveClick }: Props) => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [tasks, setTasks] = useState<Task[]>(section.tasks);
+  const [tasks, setTasks] = useState<TaskType[]>(section.tasks);
   const [formData, setFormData] = useState<AddTask>(initialFormValues);
   const [isFormValid, setFormValid] = useState<boolean>(false);
 
@@ -117,30 +119,14 @@ const Section = ({ section, onMoveClick }: Props) => {
           />
         </form>
 
-        {tasks.map((task: Task, index: number) => (
-          <div className="task" key={task.id}>
-            <div className="task__details">
-              <p className="task__name paragraph">{task.name}</p>
-              <p className="task__description u-mt-sm paragraph">
-                {task.description}
-              </p>
-            </div>
-            <div className="task__buttons">
-              <Button
-                type="button"
-                iconName="fa-arrow-right"
-                className="btn--white btn--icon"
-                onClick={() => onMoveClick(task.id!, section.id!)}
-              />
-
-              <Button
-                type="button"
-                iconName="fa-trash-alt"
-                className="btn--danger btn--icon"
-                onClick={() => handleDeleteTask(index, task.id!)}
-              />
-            </div>
-          </div>
+        {tasks.map((task: TaskType, index: number) => (
+          <Task
+            key={task.id}
+            task={task}
+            index={index}
+            onMoveClick={() => onMoveClick(task.id!, section.id!)}
+            handleDeleteTask={handleDeleteTask}
+          ></Task>
         ))}
       </div>
     </div>
