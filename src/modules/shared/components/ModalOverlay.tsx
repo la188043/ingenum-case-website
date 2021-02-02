@@ -11,26 +11,26 @@ const placementStyle = {
 };
 
 interface Props {
-  title: string;
   onClose: () => void;
 }
 
-const InnerModal = ({ title, onClose, children }: PropsWithChildren<Props>) => {
+const InnerModal = ({ onClose, children }: PropsWithChildren<Props>) => {
   Modal.setAppElement('#modal');
 
   return (
     <Modal isOpen={true} style={placementStyle} contentLabel="Overlay Modal">
-      <h1>{title}</h1>
-      {children}
-      <button onClick={onClose}>Fermer</button>
+      <div className="container">
+        {children}
+        <button className="btn btn--danger u-mt-lg" onClick={onClose}>
+          Fermer
+        </button>
+      </div>
     </Modal>
   );
 };
 
 const ModalOverlay = (props: PropsWithChildren<Props>) => (
-  <InnerModal title={props.title} onClose={props.onClose}>
-    {props.children}
-  </InnerModal>
+  <InnerModal onClose={props.onClose}>{props.children}</InnerModal>
 );
 
 export default ModalOverlay;
