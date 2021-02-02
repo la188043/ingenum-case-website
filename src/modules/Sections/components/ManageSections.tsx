@@ -9,6 +9,7 @@ import Section from './Section';
 import { AddSection } from '../models/AddSection.model';
 import Button from '../../shared/components/Button';
 import taskService from '../services/task.service';
+import Task from '../models/Task.model';
 
 const ManageSections = () => {
   const [sections, setSections] = useState<SectionType[]>([]);
@@ -29,6 +30,14 @@ const ManageSections = () => {
   }, []);
 
   const resetForm = () => formRef.current?.reset();
+
+  const onTaskUpdated = async (taskId: string, newTask: Task) => {
+    try {
+      await taskService.updateTask(taskId, newTask);
+
+      loadSections();
+    } catch {}
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldName = e.target.name;
@@ -92,6 +101,7 @@ const ManageSections = () => {
             key={section.id}
             section={section}
             onMoveClick={handleMoveTask}
+            onTaskUpdated={onTaskUpdated}
           />
         ))}
       </div>

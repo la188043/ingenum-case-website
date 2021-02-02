@@ -13,9 +13,10 @@ import Button from '../../shared/components/Button';
 interface Props {
   section: SectionType;
   onMoveClick: (taskId: string, sectionId: string) => void;
+  onTaskUpdated: (taskId: string, newTask: TaskType) => void;
 }
 
-const Section = ({ section, onMoveClick }: Props) => {
+const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
   const initialFormValues: AddTask = {
     name: '',
     description: '',
@@ -126,6 +127,7 @@ const Section = ({ section, onMoveClick }: Props) => {
             index={index}
             onMoveClick={() => onMoveClick(task.id!, section.id!)}
             handleDeleteTask={handleDeleteTask}
+            onTaskUpdated={onTaskUpdated}
           ></Task>
         ))}
       </div>

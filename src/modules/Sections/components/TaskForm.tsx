@@ -62,6 +62,7 @@ const TaskForm = ({ action, task, onSubmit }: Props) => {
         className="form__input"
         type="datetime-local"
         name="dueDate"
+        value={new Date(formData.dueDate).toISOString().substring(0, 16)}
         onChange={handleChange}
       />
 

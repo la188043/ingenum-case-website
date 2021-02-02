@@ -1,29 +1,39 @@
 import { Task as TaskType } from '../models/Task.model';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Button from '../../shared/components/Button';
 import OverlayModal from '../../shared/components/ModalOverlay';
 import TaskForm from './TaskForm';
+import taskService from '../services/task.service';
 
 interface Props {
   task: TaskType;
   index: number;
   onMoveClick: () => void;
   handleDeleteTask: (index: number, taskId: string) => void;
+  onTaskUpdated: (taskId: string, newTask: TaskType) => void;
 }
 
-const Task = ({ task, index, onMoveClick, handleDeleteTask }: Props) => {
+const Task = ({
+  task,
+  index,
+  onMoveClick,
+  handleDeleteTask,
+  onTaskUpdated,
+}: Props) => {
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   const onOpenModal = () => setModalOpen(true);
   const onCloseModal = () => setModalOpen(false);
 
-  const handleUpdateTask = (
+  const handleUpdateTask = async (
     event: React.FormEvent<HTMLFormElement>,
     newTask: TaskType
   ) => {
     event.preventDefault();
-    console.log(newTask);
+
+    const taskId = newTask.id;
+    onTaskUpdated(taskId!, newTask);
   };
 
   return (
