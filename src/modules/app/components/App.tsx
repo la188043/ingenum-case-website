@@ -1,6 +1,4 @@
-import { promises } from 'fs';
 import React from 'react';
-
 import ManageSection from '../../Sections/components/ManageSections';
 
 const App = () => (

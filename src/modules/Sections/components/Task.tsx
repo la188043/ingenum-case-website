@@ -1,10 +1,10 @@
+import { useState } from 'react';
+
 import { Task as TaskType } from '../models/Task.model';
-import { useEffect, useState } from 'react';
 
 import Button from '../../shared/components/Button';
 import OverlayModal from '../../shared/components/ModalOverlay';
 import TaskForm from './TaskForm';
-import taskService from '../services/task.service';
 
 interface Props {
   task: TaskType;

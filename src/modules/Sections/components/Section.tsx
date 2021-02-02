@@ -3,13 +3,13 @@ import useNotifications from '../../shared/hooks/useNotifications.hook';
 
 import taskService from '../services/task.service';
 
-import { Section as SectionType } from '../models/Section.model';
-import { Task as TaskType } from '../models/Task.model';
-import { AddTask } from '../models/AddTask.model';
-import Task from '../components/Task';
-
 import Button from '../../shared/components/Button';
 import NotificationContainer from '../../shared/components/NotificationContainer';
+import Task from '../components/Task';
+
+import { AddTask } from '../models/AddTask.model';
+import { Section as SectionType } from '../models/Section.model';
+import { Task as TaskType } from '../models/Task.model';
 
 interface Props {
   section: SectionType;
