@@ -15,7 +15,6 @@ const Notification = ({ text, type, onCloseClick }: Props) => {
     const timeoutId = setTimeout(() => {
       onCloseClick();
     }, 3000);
-
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -36,12 +35,7 @@ const Notification = ({ text, type, onCloseClick }: Props) => {
     <div
       className={classNames('notification', getColor(), 'notification-popup')}
     >
-      <Button
-        type="button"
-        value=""
-        className="btn--danger"
-        onClick={onCloseClick}
-      />
+      <button className="delete" onClick={onCloseClick} />
 
       {text}
     </div>

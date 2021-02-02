@@ -1,28 +1,44 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useNotifications from '../../shared/hooks/useNotifications.hook';
 
 import sectionService from '../services/section.service';
+import taskService from '../services/task.service';
 
 import { Section as SectionType } from '../models/Section.model';
+import { AddSection } from '../models/AddSection.model';
+import Task from '../models/Task.model';
 
 import Loading from '../../shared/components/Loading';
 import Section from './Section';
-import { AddSection } from '../models/AddSection.model';
 import Button from '../../shared/components/Button';
-import taskService from '../services/task.service';
-import Task from '../models/Task.model';
+import NotificationContainer from '../../shared/components/NotificationContainer';
 
 const ManageSections = () => {
   const [sections, setSections] = useState<SectionType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [formData, setFormData] = useState<AddSection>({ name: '' });
 
+  const {
+    addNotification,
+    removeNotification,
+    notifications,
+  } = useNotifications();
+
   const formRef = useRef<HTMLFormElement>(null);
 
   const loadSections = async () => {
     setLoading(true);
-    const response = await sectionService.getAll();
-    setSections(response);
-    setLoading(false);
+    try {
+      const response = await sectionService.getAll();
+      setSections(response);
+    } catch {
+      addNotification(
+        'error',
+        "Une erreur s'est produite lors du chargement des données"
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -36,7 +52,12 @@ const ManageSections = () => {
       await taskService.updateTask(taskId, newTask);
 
       loadSections();
-    } catch {}
+    } catch {
+      addNotification(
+        'error',
+        "Une erreur s'est produite lors de la mise à jour de la tâche"
+      );
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,13 +75,15 @@ const ManageSections = () => {
 
     try {
       const newSection = await sectionService.addSection(formData);
-
       setSections([...sections, newSection]);
-    } catch {
-      return;
-    }
 
-    resetForm();
+      resetForm();
+    } catch {
+      addNotification(
+        'error',
+        "Une erreur s'est produite lors de l'ajout de la section"
+      );
+    }
   };
 
   const handleMoveTask = async (taskId: string, currentSectionId: string) => {
@@ -72,17 +95,30 @@ const ManageSections = () => {
       const nextSectionId = nextSection.id;
 
       setLoading(true);
-      await taskService.moveTask(taskId, { tableId: nextSectionId! });
-      setLoading(false);
-
-      loadSections();
+      try {
+        await taskService.moveTask(taskId, { tableId: nextSectionId! });
+        loadSections();
+      } catch {
+        addNotification(
+          'error',
+          "Une erreur s'est produite lors du déplacement de la tâche"
+        );
+      } finally {
+        setLoading(false);
+      }
     } else {
-      return; // TODO Notification
+      console.log('Erreur => affichage notif');
+      addNotification('warning', 'Il est impossible de déplacer cette tâche');
     }
   };
 
   return (
     <Loading loading={loading}>
+      <NotificationContainer
+        removeNotif={removeNotification}
+        notif={notifications}
+      />
+
       <form className="form u-mb-md" onSubmit={handleAddSection} ref={formRef}>
         <h3 className="heading-tertiary">Ajouter une section</h3>
         <input
