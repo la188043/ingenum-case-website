@@ -96,8 +96,17 @@ const ManageSections = () => {
 
       setLoading(true);
       try {
-        await taskService.moveTask(taskId, { tableId: nextSectionId! });
-        loadSections();
+        const response = await taskService.moveTask(taskId, {
+          tableId: nextSectionId!,
+        });
+
+        // TODO Appel trop rapide (la task ne sera pas bougée alors qu'en db si)
+        response
+          ? loadSections()
+          : addNotification(
+              'error',
+              "Une erreur s'est produite lors du déplacement de la tâche (response)"
+            );
       } catch {
         addNotification(
           'error',
@@ -107,7 +116,6 @@ const ManageSections = () => {
         setLoading(false);
       }
     } else {
-      console.log('Erreur => affichage notif');
       addNotification('warning', 'Il est impossible de déplacer cette tâche');
     }
   };
