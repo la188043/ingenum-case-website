@@ -22,18 +22,20 @@ const Notification = ({ text, type, onCloseClick }: Props) => {
   const getColor = () => {
     switch (type) {
       case 'success':
-        return 'notification--success';
+        return 'is-success';
       case 'warning':
-        return 'notification--warning';
+        return 'is-warning';
       case 'error':
-        return 'notification--danger';
+        return 'is-danger';
       case 'info':
-        return 'notification--info';
+        return 'is-info';
     }
   };
 
   return (
-    <div className={classNames('notification', getColor())}>
+    <div
+      className={classNames('notification', getColor(), 'notification-popup')}
+    >
       <Button
         type="button"
         value=""

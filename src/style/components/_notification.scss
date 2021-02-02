@@ -1,0 +1,13 @@
+@import '../../../node_modules/bulma/sass/elements/notification.sass';
+
+.notification-popup {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 80ch;
+  z-index: 100;
+
+  @media screen and (max-width: $tablet) {
+    min-width: 90%;
+  }
+}
