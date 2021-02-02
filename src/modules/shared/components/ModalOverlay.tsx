@@ -19,7 +19,7 @@ const InnerModal = ({ onClose, children }: PropsWithChildren<Props>) => {
 
   return (
     <Modal isOpen={true} style={placementStyle} contentLabel="Overlay Modal">
-      <div className="container">
+      <div className="container-sm">
         {children}
         <button className="btn btn--danger" onClick={onClose}>
           Fermer
