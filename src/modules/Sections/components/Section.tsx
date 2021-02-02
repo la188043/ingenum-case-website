@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useNotifications from '../../shared/hooks/useNotifications.hook';
 
 import taskService from '../services/task.service';
 
 import { Section as SectionType } from '../models/Section.model';
 import { Task as TaskType } from '../models/Task.model';
 import { AddTask } from '../models/AddTask.model';
-
 import Task from '../components/Task';
 
 import Button from '../../shared/components/Button';
+import NotificationContainer from '../../shared/components/NotificationContainer';
 
 interface Props {
   section: SectionType;
@@ -28,6 +29,12 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
   const [tasks, setTasks] = useState<TaskType[]>(section.tasks);
   const [formData, setFormData] = useState<AddTask>(initialFormValues);
   const [isFormValid, setFormValid] = useState<boolean>(false);
+
+  const {
+    addNotification,
+    removeNotification,
+    notifications,
+  } = useNotifications();
 
   useEffect(() => {
     const nameValidation: RegExp = /.{4,}/g;
@@ -56,11 +63,14 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
     try {
       const newTask = await taskService.addTask(formData);
       setTasks([...tasks, newTask]);
-    } catch {
-      return; // TODO Notification
-    }
 
-    resetForm();
+      resetForm();
+    } catch {
+      addNotification(
+        'error',
+        "Une erreur est survenue lors de l'ajout d'une tâche"
+      );
+    }
   };
 
   const resetForm = () => {
@@ -73,16 +83,25 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
     if (!taskId) return; // TODO Notification
 
     try {
-      if (await taskService.deleteTask(taskId)) {
+      const response = await taskService.deleteTask(taskId);
+      if (response) {
         setTasks([...tasks.filter(task => task.id !== taskId)]);
       }
     } catch (err) {
-      return; // TODO Notification
+      addNotification(
+        'error',
+        'Une erreur est survenue lors de la suppression'
+      );
     }
   };
 
   return (
     <div className="section">
+      <NotificationContainer
+        removeNotif={removeNotification}
+        notif={notifications}
+      />
+
       <h2 className="heading-secondary u-center-text underline">
         {section.name}
       </h2>
