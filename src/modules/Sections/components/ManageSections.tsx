@@ -94,26 +94,18 @@ const ManageSections = () => {
       const nextSection: SectionType = sections[nextSectionIndex];
       const nextSectionId = nextSection.id;
 
-      setLoading(true);
       try {
         const response = await taskService.moveTask(taskId, {
           tableId: nextSectionId!,
         });
 
         // TODO Appel trop rapide (la task ne sera pas bougée alors qu'en db si)
-        response
-          ? loadSections()
-          : addNotification(
-              'error',
-              "Une erreur s'est produite lors du déplacement de la tâche (response)"
-            );
+        loadSections();
       } catch {
         addNotification(
           'error',
           "Une erreur s'est produite lors du déplacement de la tâche"
         );
-      } finally {
-        setLoading(false);
       }
     } else {
       addNotification('warning', 'Il est impossible de déplacer cette tâche');
