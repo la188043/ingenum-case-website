@@ -79,8 +79,15 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
     formRef.current?.reset();
   };
 
-  const handleDeleteTask = async (taskIndex: number, taskId: string) => {
-    if (!taskId) return; // TODO Notification
+  const handleDeleteTask = async (taskId: string) => {
+    if (!taskId) {
+      addNotification(
+        'error',
+        "Une erreur s'est produite lors de la suppression"
+      );
+
+      return;
+    }
 
     try {
       const response = await taskService.deleteTask(taskId);

@@ -10,7 +10,7 @@ interface Props {
   task: TaskType;
   index: number;
   onMoveClick: () => void;
-  handleDeleteTask: (index: number, taskId: string) => void;
+  handleDeleteTask: (taskId: string) => void;
   onTaskUpdated: (taskId: string, newTask: TaskType) => void;
 }
 
@@ -73,7 +73,7 @@ const Task = ({
             type="button"
             iconName="fa-trash-alt"
             className="btn--danger btn--icon"
-            onClick={() => handleDeleteTask(index, task.id!)}
+            onClick={() => handleDeleteTask(task.id!)}
           />
         </div>
       </div>
