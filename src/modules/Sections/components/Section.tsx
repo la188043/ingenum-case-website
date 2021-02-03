@@ -65,6 +65,7 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
       setTasks([...tasks, newTask]);
 
       resetForm();
+      addNotification('success', 'Nouvelle tâche ajoutée avec succès');
     } catch {
       addNotification(
         'error',
@@ -93,6 +94,7 @@ const Section = ({ section, onMoveClick, onTaskUpdated }: Props) => {
       const response = await taskService.deleteTask(taskId);
       if (response) {
         setTasks([...tasks.filter(task => task.id !== taskId)]);
+        addNotification('info', 'Tâche correctement supprimée');
       }
     } catch (err) {
       addNotification(

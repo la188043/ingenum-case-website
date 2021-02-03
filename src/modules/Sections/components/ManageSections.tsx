@@ -52,6 +52,10 @@ const ManageSections = () => {
       await taskService.updateTask(taskId, newTask);
 
       loadSections();
+      addNotification(
+        'success',
+        'Mise à jour de la tâche effectuée avec succès'
+      );
     } catch {
       addNotification(
         'error',
@@ -78,6 +82,8 @@ const ManageSections = () => {
       setSections([...sections, newSection]);
 
       resetForm();
+
+      addNotification('success', 'Section correctement ajoutée');
     } catch {
       addNotification(
         'error',
@@ -99,8 +105,8 @@ const ManageSections = () => {
           tableId: nextSectionId!,
         });
 
-        // TODO Appel trop rapide (la task ne sera pas bougée alors qu'en db si)
         loadSections();
+        addNotification('success', 'Tâche déplacée avec succès');
       } catch {
         addNotification(
           'error',
